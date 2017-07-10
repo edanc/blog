@@ -17,6 +17,9 @@
         <nav role="navigation">
           <ul class="nav nav-pills pull-right">
             <li>
+              <%= link("Sign in with Google", to: auth_path(@conn, :index, "google"))%>
+            </li>
+            <li>
              <%= link("Home", to: page_path(@conn, :index))%>
             </li>
 
@@ -25,7 +28,7 @@
             </li>
           </ul>
         </nav>
-        <span class="logo"></span>
+        <span class="logo_change_me"></span>
       </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
