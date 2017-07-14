@@ -11,7 +11,7 @@ defmodule Blog.AuthController do
     token = get_token!(provider, code)
 
     # Request the user's data with the access token
-    user = get_user!(provider, token).body
+    user = get_user!(provider, token)
 
     # Store the user in the session under `:current_user` and redirect to /.
     # In most cases, we'd probably just store the user's ID that can be used
@@ -22,7 +22,7 @@ defmodule Blog.AuthController do
     # the access token as well.
     conn
     |> put_session(:current_user, user)
-    |> put_session(:access_token, token.access_token)
+    |> put_session(:access_token, token.token.access_token)
     |> redirect(to: "/")
   end
 
@@ -36,7 +36,7 @@ defmodule Blog.AuthController do
   defp get_token!(_, _), do: raise "No matching provider available"
 
   defp get_user!("google", client) do
-    {:ok, %{body: user}} = OAuth2.Client.get!(client, "https://www.googleapis.com/plus/v1/people/me/openIdConnect")
+    %{body: user} = OAuth2.Client.get!(client, "https://www.googleapis.com/plus/v1/people/me/openIdConnect")
     %{name: user["name"], avatar: user["picture"]}
   end
 end
