@@ -7,6 +7,7 @@ defmodule Blog.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Blog.Session, Blog.Repo
   end
 
   pipeline :api do
@@ -18,15 +19,14 @@ defmodule Blog.Router do
 
     get "/", PageController, :index
     resources "/posts", PostController, only: [:new, :create, :delete, :index, :show]
+    delete "/logout", SessionController, :delete
   end
-
 
   scope "/auth", Blog do
     pipe_through :browser
 
     get "/:provider", AuthController, :index
     get "/:provider/callback", AuthController, :callback
-    delete "/logout", AuthController, :delete
   end
 
   # Other scopes may use custom stacks.
