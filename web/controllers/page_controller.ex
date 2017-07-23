@@ -1,3 +1,4 @@
+require IEx
 defmodule Blog.PageController do
   use Blog.Web, :controller
 

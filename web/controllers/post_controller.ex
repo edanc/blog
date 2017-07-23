@@ -1,12 +1,11 @@
+require IEx
 defmodule Blog.PostController do
   use Blog.Web, :controller
   alias Blog.Post
 
-  def index(conn, _params) do
+  def index(conn, user) do
     posts = Repo.all(Post)
-    token = Phoenix.Token.sign(conn, "user socket")
     conn
-    |> assign(:user_token, token)
     render(conn, "index.html", posts: posts)
   end
 

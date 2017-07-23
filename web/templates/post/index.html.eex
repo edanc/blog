@@ -1,3 +1,10 @@
-<table>
-  here
+<h1> Listing Posts </h1>
+<table class="table">
+  <%= for post <- @posts do %>
+    <tr>
+      <td><b> <%= title(post) %></b></td>
+      <td><%= link "View", to: post_path(@conn, :show, post.id) %></td>
+    </tr>
+  <% end %>
 </table>
+<%= link "create new post", to: post_path(@conn, :new) %></li>
