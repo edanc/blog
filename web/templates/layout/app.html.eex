@@ -31,7 +31,7 @@
             </li>
 
             <li>
-             <%= link("My Posts", to: post_path(@conn, :index))%>
+             <%= link("Posts", to: post_path(@conn, :index))%>
             </li>
           </ul>
         </nav>

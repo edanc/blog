@@ -1,7 +1,10 @@
 <h1> Showing Post</h1>
-<b> <%= title(@post) %></b>
+<h2> <b> <%= title(@post) %></b> </h2>
+
 </br>
+<div>
 <b> <%= content(@post) %></b>
+</div>
 
 
 <div class="row">
